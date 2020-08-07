@@ -17,7 +17,7 @@ __Table of Contents__
 * [Auto Currying (TODO)](#auto-currying-todo)
 * [Function Composition (TODO)](#function-composition-todo)
 * [Continuation (TODO)](#continuation-todo)
-* [Purity (TODO)](#purity-todo)
+* [Purity](#purity-todo)
 * [Side effects (TODO)](#side-effects-todo)
 * [Idempotent (TODO)](#idempotent-todo)
 * [Point-Free Style (TODO)](#point-free-style-todo)
@@ -168,24 +168,35 @@ Continuations are often seen in asynchronous programming when the program needs 
 ## Purity (TODO)
 
 A function is pure if the return value is only determined by its
-input values, and does not produce side effects.
+input values, and does not produce any side effects.
+
+This function is pure:
 
 ```python
-# TODO
+def add(first: int, second: int) -> int:
+    return first + second
 ```
 
 As opposed to each of the following:
 
 ```python
-# TODO
+def add_and_log(first: int, second: int) -> int:
+    print('Sum is:', first + second)  # print is a side effect
+    return first + second
 ```
 
 ## Side effects (TODO)
 
-A function or expression is said to have a side effect if apart from returning a value, it interacts with (reads from or writes to) external mutable state.
+A function or expression is said to have a side effect if apart from returning a value, 
+it interacts with (reads from or writes to) external mutable state.
 
 ```python
-# TODO
+result_sums = []
+
+def add(first: int, second: int) -> int:
+    result_sum = first + second
+    result_sums.append(result_sum)  # this is a side effect
+    return result_sum
 ```
 
 ## Idempotent (TODO)
