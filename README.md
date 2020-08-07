@@ -17,8 +17,8 @@ __Table of Contents__
 * [Auto Currying (TODO)](#auto-currying-todo)
 * [Function Composition (TODO)](#function-composition-todo)
 * [Continuation (TODO)](#continuation-todo)
+* [Side effects](#side-effects-todo)
 * [Purity](#purity-todo)
-* [Side effects (TODO)](#side-effects-todo)
 * [Idempotent (TODO)](#idempotent-todo)
 * [Point-Free Style (TODO)](#point-free-style-todo)
 * [Predicate (TODO)](#predicate-todo)
@@ -165,7 +165,27 @@ Continuations are often seen in asynchronous programming when the program needs 
 # TODO
 ```
 
-## Purity (TODO)
+## Side effects
+
+A function or expression is said to have a side effect if apart from returning a value, 
+it interacts with (reads from or writes to) external mutable state:
+
+```python
+print('This is a side effect!')
+```
+
+Or:
+
+```python
+result_sums = []
+
+def add(first: int, second: int) -> int:
+    result_sum = first + second
+    result_sums.append(result_sum)  # this is a side effect
+    return result_sum
+```
+
+## Purity
 
 A function is pure if the return value is only determined by its
 input values, and does not produce any side effects.
@@ -183,20 +203,6 @@ As opposed to each of the following:
 def add_and_log(first: int, second: int) -> int:
     print('Sum is:', first + second)  # print is a side effect
     return first + second
-```
-
-## Side effects (TODO)
-
-A function or expression is said to have a side effect if apart from returning a value, 
-it interacts with (reads from or writes to) external mutable state.
-
-```python
-result_sums = []
-
-def add(first: int, second: int) -> int:
-    result_sum = first + second
-    result_sums.append(result_sum)  # this is a side effect
-    return result_sum
 ```
 
 ## Idempotent (TODO)
