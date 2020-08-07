@@ -26,18 +26,18 @@ __Table of Contents__
 * [Category (TODO)](#category-todo)
 * [Value (TODO)](#value-todo)
 * [Constant (TODO)](#constant-todo)
-* [Functor (TODO)](#functor-todo)
-* [Pointed Functor (TODO)](#pointed-functor-todo)
 * [Lift (TODO)](#lift-todo)
 * [Referential Transparency (TODO)](#referential-transparency-todo)
 * [Equational Reasoning (TODO)](#equational-reasoning-todo)
 * [Lambda (TODO)](#lambda-todo)
 * [Lambda Calculus (TODO)](#lambda-calculus-todo)
 * [Lazy evaluation (TODO)](#lazy-evaluation-todo)
+* [Functor (TODO)](#functor-todo)
+* [Applicative (TODO)](#applicative-todo)
+* [Applicative Functor (TODO)](#applicative-functor-todo)
 * [Monoid (TODO)](#monoid-todo)
 * [Monad (TODO)](#monad-todo)
 * [Comonad (TODO)](#comonad-todo)
-* [Applicative Functor (TODO)](#applicative-functor-todo)
 * [Morphism (TODO)](#morphism-todo)
   * [Endomorphism (TODO)](#endomorphism-todo)
   * [Isomorphism (TODO)](#isomorphism-todo)
@@ -58,7 +58,6 @@ __Table of Contents__
 * [Option (TODO)](#option-todo)
 * [Function (TODO)](#function-todo)
 * [Partial function (TODO)](#partial-function-todo)
-* [Functional Programming Libraries in Python](#functional-programming-libraries-in-python)
 
 
 <!-- /RM -->
@@ -282,34 +281,6 @@ Constants are [referentially transparent](#referential-transparency). That is, t
 # TODO
 ```
 
-## Functor (TODO)
-
-An object that implements a `map` function which, while running over each value in the object to produce a new object, adheres to two rules:
-
-__Preserves identity__
-```
-object.map(x => x) ≍ object
-```
-
-__Composable__
-
-```
-object.map(compose(f, g)) ≍ object.map(g).map(f)
-```
-
-```python
-# TODO
-```
-
-## Pointed Functor (TODO)
-
-An object with an `of` function that puts _any_ number of values into it. The following property
-`of(f(x)) == of(x).map(f)` must also hold for any pointed functor.
-
-```python 
-# TODO
-```
-
 ## Lift (TODO)
 
 Lifting is when you take a value and put it into an object like a [functor](#pointed-functor). If you lift a function into an [Applicative Functor](#applicative-functor) then you can make it work on values that are also in that functor.
@@ -375,6 +346,29 @@ Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluatio
 ```python
 # TODO
 ```
+
+## Functor (TODO)
+
+An object that implements a `map` function which, while running over each value in the object to produce a new object, adheres to two rules:
+
+__Preserves identity__
+```
+object.map(x => x) ≍ object
+```
+
+__Composable__
+
+```
+object.map(compose(f, g)) ≍ object.map(g).map(f)
+```
+
+```python
+# TODO
+```
+
+## Applicative (TODO)
+
+## Applicative Functore (TODO)
 
 ## Monoid (TODO)
 
@@ -590,9 +584,3 @@ Fortunately a partial function can be converted to a regular (or total) one. We 
 ```python
 # TODO
 ```
-
-## Functional Programming Libraries in Python
-
-### In This Doc (TODO)
-
-A comprehensive curated list of functional programming libraries for Python can be found [here](https://github.com/sfermigier/awesome-functional-python)
