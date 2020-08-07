@@ -177,12 +177,8 @@ print('This is a side effect!')
 Or:
 
 ```python
-result_sums = []
-
-def add(first: int, second: int) -> int:
-    result_sum = first + second
-    result_sums.append(result_sum)  # this is a side effect
-    return result_sum
+numbers = []
+numbers.append(1)  # mutates the `numbers` array
 ```
 
 ## Purity
