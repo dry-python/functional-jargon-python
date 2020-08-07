@@ -19,7 +19,7 @@ __Table of Contents__
 * [Continuation (TODO)](#continuation-todo)
 * [Side effects](#side-effects)
 * [Purity](#purity)
-* [Idempotent (TODO)](#idempotent-todo)
+* [Idempotent](#idempotent)
 * [Point-Free Style (TODO)](#point-free-style-todo)
 * [Predicate (TODO)](#predicate-todo)
 * [Contracts (TODO)](#contracts-todo)
@@ -189,24 +189,26 @@ input values, and does not produce any side effects.
 This function is pure:
 
 ```python
-def add(first: int, second: int) -> int:
-    return first + second
+>>> def add(first: int, second: int) -> int:
+...    return first + second
 ```
 
 As opposed to each of the following:
 
 ```python
-def add_and_log(first: int, second: int) -> int:
-    print('Sum is:', first + second)  # print is a side effect
-    return first + second
+>>> def add_and_log(first: int, second: int) -> int:
+...    print('Sum is:', first + second)  # print is a side effect
+...    return first + second
 ```
 
-## Idempotent (TODO)
+## Idempotent
 
-A function is idempotent if reapplying it to its result does not produce a different result.
+A function is idempotent if reapplying it to its result does not produce a different result:
 
 ```python
-# TODO
+>>> assert sorted([2, 1]) == [1, 2]
+>>> assert sorted(sorted([2, 1])) == [1, 2]
+>>> assert sorted(sorted(sorted([2, 1]))) == [1, 2]
 ```
 
 ## Point-Free Style (TODO)
