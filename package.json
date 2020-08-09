@@ -39,7 +39,11 @@
       "lint-no-empty-url",
       "lint-code-block-style",
       "validate-links",
-      "preset-lint-recommended",
+      "remark-preset-lint-recommended",
+      [
+        "lint-list-item-indent",
+        "space"
+      ],
       "preset-lint-consistent"
     ]
   }
