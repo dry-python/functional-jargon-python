@@ -1,0 +1,20 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  remark_check:
+    name: remark check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: yarn install
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+      
+      - name: yarn test
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: test
