@@ -309,7 +309,7 @@ Say we have function greet:
 # TODO
 ```
 
-##  Equational Reasoning (TODO)
+## Equational Reasoning (TODO)
 
 When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
 
@@ -542,7 +542,7 @@ The [sumtypes](https://github.com/radix/sumtypes/) library in Python helps with 
 
 ### Product type (TODO)
 
-A **product** type combines types together in a way you're probably more familiar with:
+A __product__ type combines types together in a way you're probably more familiar with:
 
 ```python
 # TODO
@@ -564,7 +564,7 @@ Option is useful for composing functions that might not return a value.
 
 ## Function (TODO)
 
-A **function** `f :: A => B` is an expression - often called arrow or lambda expression - with **exactly one (immutable)** parameter of type `A` and **exactly one** return value of type `B`. That value depends entirely on the argument, making functions context-independant, or [referentially transparent](#referential-transparency-todo). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
+A __function__ `f :: A => B` is an expression - often called arrow or lambda expression - with __exactly one (immutable)__ parameter of type `A` and __exactly one__ return value of type `B`. That value depends entirely on the argument, making functions context-independant, or [referentially transparent](#referential-transparency-todo). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
 
 ```python
 # TODO
