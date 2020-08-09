@@ -118,7 +118,7 @@ You can also use `functools.partial` to partially apply a function in Python:
 # TODO
 ```
 
-Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying) functions are automatically partially applied.
+Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying-todo) functions are automatically partially applied.
 
 
 ## Currying (TODO)
@@ -212,7 +212,7 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 
 ## Point-Free Style (TODO)
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying-todo) or other [Higher-Order functions](#higher-order-functions-hof-todo). A.K.A Tacit programming.
 
 ```python
 # TODO
@@ -275,7 +275,7 @@ A variable that cannot be reassigned once defined.
 # TODO
 ```
 
-Constants are [referentially transparent](#referential-transparency). That is, they can be replaced with the values that they represent without affecting the result.
+Constants are [referentially transparent](#referential-transparency-todo). That is, they can be replaced with the values that they represent without affecting the result.
 
 ```python
 # TODO
@@ -283,7 +283,7 @@ Constants are [referentially transparent](#referential-transparency). That is, t
 
 ## Lift (TODO)
 
-Lifting is when you take a value and put it into an object like a [functor](#pointed-functor). If you lift a function into an [Applicative Functor](#applicative-functor) then you can make it work on values that are also in that functor.
+Lifting is when you take a value and put it into an object like a [functor](#pointed-functor-todo). If you lift a function into an [Applicative Functor](#applicative-functor-todo) then you can make it work on values that are also in that functor.
 
 Some implementations have a function called `lift`, or `liftA2` to make it easier to run functions on functors.
 
@@ -366,6 +366,8 @@ object.map(compose(f, g)) ≍ object.map(g).map(f)
 # TODO
 ```
 
+## Pointed Functor (TODO)
+
 ## Applicative (TODO)
 
 ## Applicative Functore (TODO)
@@ -383,7 +385,7 @@ In this case number is the object and `+` is the function.
 
 ## Monad (TODO)
 
-A monad is an object with [`of`](#pointed-functor) and `chain` functions. `chain` is like [`map`](#functor) except it un-nests the resulting nested object.
+A monad is an object with [`of`](#pointed-functor-todo) and `chain` functions. `chain` is like [`map`](#functor-todo) except it un-nests the resulting nested object.
 
 ```python
 # TODO
@@ -524,7 +526,7 @@ __Further reading__
 
 ## Algebraic data type (TODO)
 
-A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type) and [product](#product-type).
+A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type-todo) and [product](#product-type-todo).
 
 ### Sum type (TODO)
 
@@ -550,7 +552,7 @@ See also [Set theory](https://en.wikipedia.org/wiki/Set_theory).
 
 ## Option (TODO)
 
-Option is a [sum type](#sum-type) with two cases often called `Some` and `None`.
+Option is a [sum type](#sum-type-todo) with two cases often called `Some` and `None`.
 
 Option is useful for composing functions that might not return a value.
 
@@ -562,7 +564,7 @@ Option is useful for composing functions that might not return a value.
 
 ## Function (TODO)
 
-A **function** `f :: A => B` is an expression - often called arrow or lambda expression - with **exactly one (immutable)** parameter of type `A` and **exactly one** return value of type `B`. That value depends entirely on the argument, making functions context-independant, or [referentially transparent](#referential-transparency). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
+A **function** `f :: A => B` is an expression - often called arrow or lambda expression - with **exactly one (immutable)** parameter of type `A` and **exactly one** return value of type `B`. That value depends entirely on the argument, making functions context-independant, or [referentially transparent](#referential-transparency-todo). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
 
 ```python
 # TODO
@@ -570,7 +572,7 @@ A **function** `f :: A => B` is an expression - often called arrow or lambda exp
 
 ## Partial function (TODO)
 
-A partial function is a [function](#function) which is not defined for all arguments - it might return an unexpected result or may never terminate. Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
+A partial function is a [function](#function-todo) which is not defined for all arguments - it might return an unexpected result or may never terminate. Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
 
 ```python
 # TODO
@@ -579,7 +581,7 @@ A partial function is a [function](#function) which is not defined for all argum
 ### Dealing with partial functions (TODO)
 
 Partial functions are dangerous as they need to be treated with great caution. You might get an unexpected (wrong) result or run into runtime errors. Sometimes a partial function might not return at all. Being aware of and treating all these edge cases accordingly can become very tedious.
-Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#Option) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
+Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#option-todo) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
 
 ```python
 # TODO
