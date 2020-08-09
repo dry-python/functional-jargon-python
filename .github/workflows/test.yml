@@ -18,3 +18,17 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: test
+  misspell_check:
+    name: misspell check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: misspell run
+        uses: sobolevn/misspell-fixer-action@master
+        with:
+          options: '-rsv .'
+      
+      - name: check misspell changes
+        run: |
+          [ -n "$(find . -name 'README.md.*.BAK' | head -1)" ] && exit 1 || echo exit 0
