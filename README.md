@@ -9,7 +9,7 @@ This document is WIP and pull requests are welcome!
 __Table of Contents__
 <!-- RM(noparent,notop) -->
 
-* [Arity (TODO)](#arity-todo)
+* [Arity](#arity)
 * [Higher-Order Functions (HOF) (TODO)](#higher-order-functions-hof-todo)
 * [Closure (TODO)](#closure-todo)
 * [Partial Application (TODO)](#partial-application-todo)
@@ -62,13 +62,76 @@ __Table of Contents__
 
 <!-- /RM -->
 
-## Arity (TODO)
+## Arity
 
-The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity." Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding (see below).
+The number of arguments a function takes. From words like unary, binary, ternary, etc. This word has the distinction of being composed of two suffixes, "-ary" and "-ity". Addition, for example, takes two arguments, and so it is defined as a binary function or a function with an arity of two. Such a function may sometimes be called "dyadic" by people who prefer Greek roots to Latin. Likewise, a function that takes a variable number of arguments is called "variadic," whereas a binary function must be given two and only two arguments, currying and partial application notwithstanding.
+
+We can use the `inspect` module to know the arity of a function, see the example below:
 
 ```python
-# TODO
+>>> from inspect import signature
+
+>>> def multiply(number_one: int, number_two: int) -> int:  # arity 2
+...     return number_one * number_two
+
+>>> assert len(signature(multiply).parameters) == 2
 ```
+
+### Arity Distinctions
+
+#### Minimum Arity and Maximum Arity
+
+The __minimum arity__ is the smallest number of arguments the function expects to work, the __maximum arity__ is the largest number of arguments function can take. Generally, these numbers are different when our function has default parameter values.
+
+```python
+>>> from inspect import getfullargspec
+>>> from typing import Any
+
+>>> def example(a: Any, b: Any, c: Any = None) -> None:  # mim arity: 2 | max arity: 3
+...     pass
+
+>>> example_args_spec = getfullargspec(example)
+>>> max_arity = len(example_args_spec.args)
+>>> min_arity = max_arity - len(example_args_spec.defaults)
+
+>>> assert max_arity == 3
+>>> assert min_arity == 2
+```
+
+#### Fixed Arity and Variable Arity
+
+A function has __fixed arity__ when you have to call it with the same number of arguments as the number of its parameters and a function has __variable arity__ when you can call it with variable number of arguments, like functions with default parameters values.
+
+```python
+>>> from typing import Any
+
+>>> def fixed_arity(a: Any, b: Any) -> None:  # we have to call with 2 arguments
+...     pass
+
+>>> def variable_arity(a: Any, b: Any = None) -> None:  # we can call with 1 or 2 arguments
+...     pass
+```
+
+#### Definitive Arity and Indefinite Arity
+
+When a function can receive a finite number of arguments it has __definitive arity__, otherwise if the function can receive an undefined number of arguments it has __indefinite arity__. We can reproduce the __indefinite arity__ using Python _*args_ and _**kwargs_, see the example below:
+
+```python
+>>> from typing import Any
+
+>>> def definitive_arity(a: Any, b: Any = None) -> None: # we can call just with 1 or 2 arguments
+...     pass
+
+>>> def indefinite_arity(*args: Any, **kwargs: Any) -> None: # we can call with how many arguments we want
+...     pass
+```
+
+### Arguments vs Parameters
+
+There is a little difference between __arguments__ and __parameters__:
+
+* __arguments__: are the values that are passed to a function
+* __parameters__: are the variables in the function definition
 
 ## Higher-Order Functions (HOF) (TODO)
 
