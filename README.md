@@ -13,8 +13,7 @@ __Table of Contents__
 * [Higher-Order Functions (HOF) (TODO)](#higher-order-functions-hof-todo)
 * [Closure (TODO)](#closure-todo)
 * [Partial Application (TODO)](#partial-application-todo)
-* [Currying (TODO)](#currying-todo)
-* [Auto Currying (TODO)](#auto-currying-todo)
+* [Currying](#currying)
 * [Function Composition (TODO)](#function-composition-todo)
 * [Continuation (TODO)](#continuation-todo)
 * [Side effects](#side-effects)
@@ -184,26 +183,51 @@ You can also use `functools.partial` to partially apply a function in Python:
 Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying-todo) functions are automatically partially applied.
 
 
-## Currying (TODO)
+## Currying
 
 The process of converting a function that takes multiple arguments into a function that takes them one at a time.
 
 Each time the function is called it only accepts one argument and returns a function that takes one argument until all arguments are passed.
 
 ```python
-# TODO
+>>> from returns.curry import curry
+
+>>> @curry
+... def takes_three_args(a: int, b: int, c: int) -> int:
+...     return a + b + c
+
+>>> assert takes_three_args(1)(2)(3) == 6
 ```
 
-## Auto Currying (TODO)
-Transforming a function that takes multiple arguments into one that if given less than its correct number of arguments returns a function that takes the rest. When the function gets the correct number of arguments it is then evaluated.
+Some implementations of curried functions 
+can also take several of arguments instead of just a single argument:
 
 ```python
-# TODO
+>>> assert takes_three_args(1, 2)(3) == 6
+>>> assert takes_three_args(1, 2, 3) == 6
+```
+
+Let's see what type `takes_three_args` has to get a better understanding of its features:
+
+```python
+reveal_type(takes_three_args)
+
+# Revealed type is:
+# Overload(
+#   def (a: builtins.int) -> Overload(
+#     def (b: builtins.int, c: builtins.int) -> builtins.int, 
+#     def (b: builtins.int) -> def (c: builtins.int) -> builtins.int
+#   ), 
+#   def (a: builtins.int, b: builtins.int) -> def (c: builtins.int) -> builtins.int, 
+#   def (a: builtins.int, b: builtins.int, c: builtins.int) -> builtins.int
+# )'
 ```
 
 __Further reading__
+* [`@curry` docs](https://returns.readthedocs.io/en/latest/pages/curry.html#id3)
 * [Favoring Curry](http://fr.umio.us/favoring-curry/)
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
+
 
 ## Function Composition (TODO)
 
