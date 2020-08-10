@@ -1,5 +1,7 @@
 # Functional Programming Jargon
 
+[![Build Status](https://github.com/dry-python/functional-jargon-python/workflows/test/badge.svg?event=push)](https://github.com/dry-python/functional-jargon-python/actions?query=workflow%3Atest)
+
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
 This is a fork of [Functional Programming Jargon](https://github.com/jmesyou/functional-programming-jargon).
@@ -180,7 +182,7 @@ You can also use `functools.partial` to partially apply a function in Python:
 # TODO
 ```
 
-Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying-todo) functions are automatically partially applied.
+Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying) functions are automatically partially applied.
 
 
 ## Currying
@@ -204,6 +206,7 @@ can also take several of arguments instead of just a single argument:
 
 ```python
 >>> assert takes_three_args(1, 2)(3) == 6
+>>> assert takes_three_args(1)(2, 3) == 6
 >>> assert takes_three_args(1, 2, 3) == 6
 ```
 
@@ -251,6 +254,7 @@ Continuations are often seen in asynchronous programming when the program needs 
 # TODO
 ```
 
+
 ## Side effects
 
 A function or expression is said to have a side effect if apart from returning a value, 
@@ -266,6 +270,7 @@ Or:
 numbers = []
 numbers.append(1)  # mutates the `numbers` array
 ```
+
 
 ## Purity
 
@@ -287,6 +292,7 @@ As opposed to each of the following:
 ...    return first + second
 ```
 
+
 ## Idempotent
 
 A function is idempotent if reapplying it to its result does not produce a different result:
@@ -299,7 +305,7 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 
 ## Point-Free Style (TODO)
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying-todo) or other [Higher-Order functions](#higher-order-functions-hof-todo). A.K.A Tacit programming.
+Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof-todo). A.K.A Tacit programming.
 
 ```python
 # TODO
