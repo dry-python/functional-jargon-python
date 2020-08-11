@@ -16,7 +16,7 @@ __Table of Contents__
 * [Closure (TODO)](#closure-todo)
 * [Partial Application](#partial-application)
 * [Currying](#currying)
-* [Function Composition (TODO)](#function-composition-todo)
+* [Function Composition](#function-composition)
 * [Continuation (TODO)](#continuation-todo)
 * [Side effects](#side-effects)
 * [Purity](#purity)
@@ -251,13 +251,43 @@ __Further reading__
 * [Hey Underscore, You're Doing It Wrong!](https://www.youtube.com/watch?v=m3svKOdZijA)
 
 
-## Function Composition (TODO)
+## Function Composition
 
-The act of putting two functions together to form a third function where the output of one function is the input of the other.
+For example, you can compose `abs` and `int` functions like so:
 
 ```python
-# TODO
+>>> assert abs(int('-1')) == 1
 ```
+
+You can also create a third function 
+that will have an input of the first one and an output of the second one:
+
+```python
+>>> from typing import Callable, TypeVar
+
+>>> _FirstType = TypeVar('_FirstType')
+>>> _SecondType = TypeVar('_SecondType')
+>>> _ThirdType = TypeVar('_ThirdType')
+
+>>> def compose(
+...     first: Callable[[_FirstType], _SecondType],
+...     second: Callable[[_SecondType], _ThirdType],
+... ) -> Callable[[_FirstType], _ThirdType]:
+...     return lambda argument: second(first(argument))
+
+>>> assert compose(int, abs)('-1') == 1
+```
+
+We already have this functions defined as `returns.functions.compose`!
+
+```python
+>>> from returns.functions import compose
+>>> assert compose(bool, str)([]) == 'False'
+```
+
+__Further reading__
+* [`compose` docs](https://returns.readthedocs.io/en/latest/pages/functions.html#compose)
+
 
 ## Continuation (TODO)
 
