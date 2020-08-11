@@ -14,7 +14,7 @@ __Table of Contents__
 * [Arity](#arity)
 * [Higher-Order Functions (HOF) (TODO)](#higher-order-functions-hof-todo)
 * [Closure (TODO)](#closure-todo)
-* [Partial Application (TODO)](#partial-application-todo)
+* [Partial Application](#partial-application)
 * [Currying](#currying)
 * [Function Composition (TODO)](#function-composition-todo)
 * [Continuation (TODO)](#continuation-todo)
@@ -167,22 +167,41 @@ __Further reading/Sources__
 * [Lambda Vs Closure](http://stackoverflow.com/questions/220658/what-is-the-difference-between-a-closure-and-a-lambda)
 * [JavaScript Closures highly voted discussion](http://stackoverflow.com/questions/111102/how-do-javascript-closures-work)
 
-## Partial Application (TODO)
+
+## Partial Application
 
 Partially applying a function means creating a new function by pre-filling some of the arguments to the original function.
-
+You can also use `functools.partial` or `returns.curry.partial` to partially apply a function in Python:
 
 ```python
-# TODO
+>>> from returns.curry import partial
+
+>>> def takes_three_arguments(arg1: int, arg2: int, arg3: int) -> int:
+...     return arg1 + arg2 + arg3
+
+>>> assert partial(takes_three_arguments, 1, 2)(3) == 6
+>>> assert partial(takes_three_arguments, 1)(2, 3) == 6
+>>> assert partial(takes_three_arguments, 1, 2, 3)() == 6
 ```
 
-You can also use `functools.partial` to partially apply a function in Python:
+The difference between `returns.curry.partial` and `functools.partial` 
+is in how types are infered:
 
 ```python
-# TODO
+import functools
+
+reveal_type(functools.partial(takes_three_arguments, 1))
+# Revealed type is 'functools.partial[builtins.int*]'
+
+reveal_type(partial(takes_three_arguments, 1))
+# Revealed type is 'def (arg2: builtins.int, arg3: builtins.int) -> builtins.int'
 ```
 
 Partial application helps create simpler functions from more complex ones by baking in data when you have it. [Curried](#currying) functions are automatically partially applied.
+
+__Further reading__
+* [`@curry` docs](https://returns.readthedocs.io/en/latest/pages/curry.html#partial)
+* [`functools` docs](https://docs.python.org/3/library/functools.html#functools.partial)
 
 
 ## Currying
