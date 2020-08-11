@@ -11,6 +11,9 @@ This document is WIP and pull requests are welcome!
 __Table of Contents__
 <!-- RM(noparent,notop) -->
 
+* [Side effects](#side-effects)
+* [Purity](#purity)
+* [Idempotent](#idempotent)
 * [Arity](#arity)
 * [Higher-Order Functions (HOF) (TODO)](#higher-order-functions-hof-todo)
 * [Closure (TODO)](#closure-todo)
@@ -18,9 +21,6 @@ __Table of Contents__
 * [Currying](#currying)
 * [Function Composition](#function-composition)
 * [Continuation (TODO)](#continuation-todo)
-* [Side effects](#side-effects)
-* [Purity](#purity)
-* [Idempotent](#idempotent)
 * [Point-Free Style (TODO)](#point-free-style-todo)
 * [Predicate (TODO)](#predicate-todo)
 * [Contracts (TODO)](#contracts-todo)
@@ -62,6 +62,68 @@ __Table of Contents__
 
 
 <!-- /RM -->
+
+
+## Side effects
+
+A function or expression is said to have a side effect if apart from returning a value, 
+it interacts with (reads from or writes to) external mutable state:
+
+```python
+>>> print('This is a side effect!')
+This is a side effect!
+>>>
+```
+
+Or:
+
+```python
+numbers = []
+numbers.append(1)  # mutates the `numbers` array
+```
+
+
+## Purity
+
+A function is pure if the return value is only determined by its
+input values, and does not produce any side effects.
+
+This function is pure:
+
+```python
+>>> def add(first: int, second: int) -> int:
+...    return first + second
+>>>
+```
+
+As opposed to each of the following:
+
+```python
+>>> def add_and_log(first: int, second: int) -> int:
+...    print('Sum is:', first + second)  # print is a side effect
+...    return first + second
+>>>
+```
+
+
+## Idempotent
+
+A function is idempotent if reapplying it to its result does not produce a different result:
+
+```python
+>>> assert sorted([2, 1]) == [1, 2]
+>>> assert sorted(sorted([2, 1])) == [1, 2]
+>>> assert sorted(sorted(sorted([2, 1]))) == [1, 2]
+>>>
+```
+
+Or:
+
+```python
+>>> assert abs(abs(abs(-1))) == abs(-1)
+>>>
+```
+
 
 ## Arity
 
@@ -313,59 +375,6 @@ Continuations are often seen in asynchronous programming when the program needs 
 # TODO
 ```
 
-
-## Side effects
-
-A function or expression is said to have a side effect if apart from returning a value, 
-it interacts with (reads from or writes to) external mutable state:
-
-```python
->>> print('This is a side effect!')
-This is a side effect!
->>>
-```
-
-Or:
-
-```python
-numbers = []
-numbers.append(1)  # mutates the `numbers` array
-```
-
-
-## Purity
-
-A function is pure if the return value is only determined by its
-input values, and does not produce any side effects.
-
-This function is pure:
-
-```python
->>> def add(first: int, second: int) -> int:
-...    return first + second
->>>
-```
-
-As opposed to each of the following:
-
-```python
->>> def add_and_log(first: int, second: int) -> int:
-...    print('Sum is:', first + second)  # print is a side effect
-...    return first + second
->>>
-```
-
-
-## Idempotent
-
-A function is idempotent if reapplying it to its result does not produce a different result:
-
-```python
->>> assert sorted([2, 1]) == [1, 2]
->>> assert sorted(sorted([2, 1])) == [1, 2]
->>> assert sorted(sorted(sorted([2, 1]))) == [1, 2]
->>>
-```
 
 ## Point-Free Style (TODO)
 
