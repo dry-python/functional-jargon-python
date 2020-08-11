@@ -76,6 +76,7 @@ We can use the `inspect` module to know the arity of a function, see the example
 ...     return number_one * number_two
 
 >>> assert len(signature(multiply).parameters) == 2
+>>>
 ```
 
 ### Arity Distinctions
@@ -97,6 +98,7 @@ The __minimum arity__ is the smallest number of arguments the function expects t
 
 >>> assert max_arity == 3
 >>> assert min_arity == 2
+>>>
 ```
 
 #### Fixed Arity and Variable Arity
@@ -111,6 +113,7 @@ A function has __fixed arity__ when you have to call it with the same number of 
 
 >>> def variable_arity(a: Any, b: Any = None) -> None:  # we can call with 1 or 2 arguments
 ...     pass
+>>>
 ```
 
 #### Definitive Arity and Indefinite Arity
@@ -125,6 +128,7 @@ When a function can receive a finite number of arguments it has __definitive ari
 
 >>> def indefinite_arity(*args: Any, **kwargs: Any) -> None: # we can call with how many arguments we want
 ...     pass
+>>>
 ```
 
 ### Arguments vs Parameters
@@ -182,6 +186,7 @@ You can also use `functools.partial` or `returns.curry.partial` to partially app
 >>> assert partial(takes_three_arguments, 1, 2)(3) == 6
 >>> assert partial(takes_three_arguments, 1)(2, 3) == 6
 >>> assert partial(takes_three_arguments, 1, 2, 3)() == 6
+>>>
 ```
 
 The difference between `returns.curry.partial` and `functools.partial` 
@@ -218,6 +223,7 @@ Each time the function is called it only accepts one argument and returns a func
 ...     return a + b + c
 
 >>> assert takes_three_args(1)(2)(3) == 6
+>>>
 ```
 
 Some implementations of curried functions 
@@ -227,6 +233,7 @@ can also take several of arguments instead of just a single argument:
 >>> assert takes_three_args(1, 2)(3) == 6
 >>> assert takes_three_args(1)(2, 3) == 6
 >>> assert takes_three_args(1, 2, 3) == 6
+>>>
 ```
 
 Let's see what type `takes_three_args` has to get a better understanding of its features:
@@ -257,6 +264,7 @@ For example, you can compose `abs` and `int` functions like so:
 
 ```python
 >>> assert abs(int('-1')) == 1
+>>>
 ```
 
 You can also create a third function 
@@ -276,6 +284,7 @@ that will have an input of the first one and an output of the second one:
 ...     return lambda argument: second(first(argument))
 
 >>> assert compose(int, abs)('-1') == 1
+>>>
 ```
 
 We already have this functions defined as `returns.functions.compose`!
@@ -283,6 +292,7 @@ We already have this functions defined as `returns.functions.compose`!
 ```python
 >>> from returns.functions import compose
 >>> assert compose(bool, str)([]) == 'False'
+>>>
 ```
 
 __Further reading__
@@ -310,7 +320,8 @@ A function or expression is said to have a side effect if apart from returning a
 it interacts with (reads from or writes to) external mutable state:
 
 ```python
-print('This is a side effect!')
+>>> print('This is a side effect!')
+This is a side effect!
 ```
 
 Or:
@@ -331,6 +342,7 @@ This function is pure:
 ```python
 >>> def add(first: int, second: int) -> int:
 ...    return first + second
+>>>
 ```
 
 As opposed to each of the following:
@@ -339,6 +351,7 @@ As opposed to each of the following:
 >>> def add_and_log(first: int, second: int) -> int:
 ...    print('Sum is:', first + second)  # print is a side effect
 ...    return first + second
+>>>
 ```
 
 
@@ -350,6 +363,7 @@ A function is idempotent if reapplying it to its result does not produce a diffe
 >>> assert sorted([2, 1]) == [1, 2]
 >>> assert sorted(sorted([2, 1])) == [1, 2]
 >>> assert sorted(sorted(sorted([2, 1]))) == [1, 2]
+>>>
 ```
 
 ## Point-Free Style (TODO)
