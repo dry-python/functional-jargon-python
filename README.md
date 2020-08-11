@@ -322,6 +322,7 @@ it interacts with (reads from or writes to) external mutable state:
 ```python
 >>> print('This is a side effect!')
 This is a side effect!
+>>>
 ```
 
 Or:
