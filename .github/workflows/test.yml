@@ -3,6 +3,22 @@ name: test
 on: [push, pull_request]
 
 jobs:
+  doctests:
+    name: doctests with pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+       
+      - name: Run tests
+        run: pytest --doctest-modules --doctest-glob='*.md' README.md
+          
   remark_check:
     name: remark check
     runs-on: ubuntu-latest
