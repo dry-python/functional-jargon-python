@@ -15,6 +15,7 @@ __Table of Contents__
 * [Purity](#purity)
 * [Idempotent](#idempotent)
 * [Arity](#arity)
+* [IO (TODO)](#io-todo)
 * [Higher-Order Functions (HOF)](#higher-order-functions-hof)
 * [Closure (TODO)](#closure-todo)
 * [Partial Application](#partial-application)
@@ -78,8 +79,9 @@ This is a side effect!
 Or:
 
 ```python
-numbers = []
-numbers.append(1)  # mutates the `numbers` array
+>>> numbers = []
+>>> numbers.append(1)  # mutates the `numbers` array
+>>>
 ```
 
 
@@ -235,6 +237,12 @@ We can create our own __HOF__, see the example below:
 >>> assert transform(transform_function, '42') == 42
 >>>
 ```
+
+
+## IO (TODO)
+
+TODO
+
 
 ## Closure (TODO)
 
