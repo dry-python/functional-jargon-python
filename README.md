@@ -15,7 +15,7 @@ __Table of Contents__
 * [Purity](#purity)
 * [Idempotent](#idempotent)
 * [Arity](#arity)
-* [Higher-Order Functions (HOF) (TODO)](#higher-order-functions-hof-todo)
+* [Higher-Order Functions (HOF)](#higher-order-functions-hof)
 * [Closure (TODO)](#closure-todo)
 * [Partial Application](#partial-application)
 * [Currying](#currying)
@@ -200,12 +200,40 @@ There is a little difference between __arguments__ and __parameters__:
 * __arguments__: are the values that are passed to a function
 * __parameters__: are the variables in the function definition
 
-## Higher-Order Functions (HOF) (TODO)
+## Higher-Order Functions (HOF)
 
-A function which takes a function as an argument and/or returns a function.
+A function that takes a function as an argument and/or returns a function, basically we can treat functions as a value.
+In Python every function/method is a Higher-Order Function.
+
+The functions like `reduce`, `map` and `filter` are good examples of __HOF__, they receive a function as their first argument.
+```python
+>>> from functools import reduce
+
+>>> reduce(lambda accumulator, number: accumulator + number, [1, 2, 3])
+6
+>>>
+```
+
+We can create our own __HOF__, see the example below:
 
 ```python
-# TODO
+>>> from typing import Callable, TypeVar
+
+>>> _ValueType = TypeVar('_ValueType')
+>>> _ReturnType = TypeVar('_ReturnType')
+
+>>> def get_transform_function() -> Callable[[str], int]:
+...     return int
+
+>>> def transform(
+...     transform_function: Callable[[_ValueType], _ReturnType],
+...     value_to_transform: _ValueType,
+... ) -> _ReturnType:
+...     return transform_function(value_to_transform)
+
+>>> transform_function = get_transform_function()
+>>> assert transform(transform_function, '42') == 42
+>>>
 ```
 
 ## Closure (TODO)
@@ -378,7 +406,7 @@ Continuations are often seen in asynchronous programming when the program needs 
 
 ## Point-Free Style (TODO)
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof-todo). A.K.A Tacit programming.
+Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
 
 ```python
 # TODO
