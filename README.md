@@ -15,7 +15,7 @@ __Table of Contents__
 * [Purity](#purity)
 * [Idempotent](#idempotent)
 * [Arity](#arity)
-* [IO (TODO)](#io-todo)
+* [IO](#io)
 * [Higher-Order Functions (HOF)](#higher-order-functions-hof)
 * [Closure (TODO)](#closure-todo)
 * [Partial Application](#partial-application)
@@ -202,6 +202,7 @@ There is a little difference between __arguments__ and __parameters__:
 * __arguments__: are the values that are passed to a function
 * __parameters__: are the variables in the function definition
 
+
 ## Higher-Order Functions (HOF)
 
 A function that takes a function as an argument and/or returns a function, basically we can treat functions as a value.
@@ -239,9 +240,26 @@ We can create our own __HOF__, see the example below:
 ```
 
 
-## IO (TODO)
+## IO
 
-TODO
+IO basically means Input/Output, but it is widely used to just tell that a function is impure.
+
+We have a special type (``IO``) and a decorator (``@impure``) to do that in Python:
+
+```python
+>>> import random
+>>> from returns.io import IO, impure
+
+>>> @impure
+... def get_random_number() -> int:
+...     return random.randint(0, 100)
+
+>>> assert isinstance(get_random_number(), IO)
+>>>
+```
+
+__Further reading__:
+* [`IO` and `@impure` docs](https://returns.readthedocs.io/en/latest/pages/io.html)
 
 
 ## Closure (TODO)
