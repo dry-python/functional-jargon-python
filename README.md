@@ -23,7 +23,7 @@ __Table of Contents__
 * [Function Composition](#function-composition)
 * [Continuation (TODO)](#continuation-todo)
 * [Point-Free Style (TODO)](#point-free-style-todo)
-* [Predicate (TODO)](#predicate-todo)
+* [Predicate](#predicate)
 * [Contracts (TODO)](#contracts-todo)
 * [Category (TODO)](#category-todo)
 * [Value (TODO)](#value-todo)
@@ -439,13 +439,26 @@ Writing functions where the definition does not explicitly identify the argument
 
 Points-free function definitions look just like normal assignments without `def` or `lambda`.
 
-## Predicate (TODO)
 
-A predicate is a function that returns true or false for a given value. A common use of a predicate is as the callback for array filter.
+## Predicate
+
+A predicate is a function that returns true or false for a given value.
+So, basically a predicate is an alias for `Callable[[_ValueType], bool]`.
+
+It is very useful when working with `if`, `all`, `any`, etc.
 
 ```python
-# TODO
+>>> def is_long(item: str) -> bool:
+...     return len(item) > 3
+
+>>> assert all(is_long(item) for item in ['1234', 'abcd'])
+>>>
 ```
+
+__Futher reading__
+* [Predicate logic](https://en.wikipedia.org/wiki/Predicate_functor_logic)
+* [`cond` docs](https://returns.readthedocs.io/en/latest/pages/pointfree.html#cond)
+
 
 ## Contracts (TODO)
 
