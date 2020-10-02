@@ -35,9 +35,8 @@ __Table of Contents__
 * [Lambda Calculus (TODO)](#lambda-calculus-todo)
 * [Lazy evaluation (TODO)](#lazy-evaluation-todo)
 * [Functor (TODO)](#functor-todo)
-* [Applicative (TODO)](#applicative-todo)
 * [Applicative Functor (TODO)](#applicative-functor-todo)
-* [Monoid (TODO)](#monoid-todo)
+* [Monoid](#monoid)
 * [Monad (TODO)](#monad-todo)
 * [Comonad (TODO)](#comonad-todo)
 * [Morphism (TODO)](#morphism-todo)
@@ -588,20 +587,31 @@ object.map(compose(f, g)) ≍ object.map(g).map(f)
 
 ## Pointed Functor (TODO)
 
-## Applicative (TODO)
+## Applicative Functor (TODO)
 
-## Applicative Functore (TODO)
 
-## Monoid (TODO)
+## Monoid
 
-An object with a function that "combines" that object with another of the same type.
+An object with a function that "combines" that object with another of the same type
+and an "empty" value, which can be added with no effect.
 
-One simple monoid is the addition of numbers:
+One simple monoid is the addition of numbers 
+(with `__add__` as an addition function and `0` as an empty element):
 
 ```python
-1 + 1 # 2
+>>> assert 1 + 1 + 0 == 2
+>>>
 ```
-In this case number is the object and `+` is the function.
+
+Tuples, lists, and strings are also monoids:
+
+```python
+>>> assert (1,) + (2,) + () == (1, 2)
+>>> assert [1] + [2] + [] == [1, 2]
+>>> assert 'a' + 'b' + '' == 'ab'
+>>>
+```
+
 
 ## Monad (TODO)
 
