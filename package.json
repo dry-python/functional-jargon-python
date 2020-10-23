@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/dry-python/functional-jargon-python#readme",
   "dependencies": {
-    "remark": "^12.0.1",
+    "remark": "^13.0.0",
     "remark-cli": "^8.0.1",
     "remark-lint": "^8.0.0",
     "remark-lint-code-block-style": "^2.0.1",
