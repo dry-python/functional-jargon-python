@@ -699,16 +699,15 @@ remark-lint-blockquote-indentation@^2.0.0:
     unist-util-position "^3.0.0"
     unist-util-visit "^2.0.0"
 
-remark-lint-checkbox-character-style@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/remark-lint-checkbox-character-style/-/remark-lint-checkbox-character-style-2.0.1.tgz#2ff2df31cb0ec99744f5122086610578c2d13754"
-  integrity sha512-ANs1HaNOEYmc+O9Xyew7HRA48VXPnk7VLM76fLEf6bifXZU+VAJe+a6cmS+ohTSVSTjkMDl9dnbqiWQRE1U4zg==
+remark-lint-checkbox-character-style@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-lint-checkbox-character-style/-/remark-lint-checkbox-character-style-3.0.0.tgz#3a982c7318ea86f80fe5ee5d6d8711b5b3cad0a2"
+  integrity sha512-691OJ5RdBRXVpvnOEiBhMB4uhHJSHVttw83O4qyAkNBiqxa1Axqhsz8FgmzYgRLQbOGd2ncVUcXG1LOJt6C0DQ==
   dependencies:
     unified-lint-rule "^1.0.0"
     unist-util-generated "^1.1.0"
     unist-util-position "^3.0.0"
     unist-util-visit "^2.0.0"
-    vfile-location "^3.0.0"
 
 remark-lint-code-block-style@^2.0.0, remark-lint-code-block-style@^2.0.1:
   version "2.0.1"
@@ -970,10 +969,10 @@ remark-lint-strong-marker@^2.0.0:
     unist-util-position "^3.0.0"
     unist-util-visit "^2.0.0"
 
-remark-lint-table-cell-padding@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/remark-lint-table-cell-padding/-/remark-lint-table-cell-padding-2.0.1.tgz#b1e557ec44e1a33beb45578e97bf9441149379f6"
-  integrity sha512-vytUq4O1cg9UBXyeduANqpVqlbZpEtpXe/hYdvAObWgp1Jr7l74Zcvm+pn/ouaCuAsrxDVWeTa5Mg3V4OByw4g==
+remark-lint-table-cell-padding@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-lint-table-cell-padding/-/remark-lint-table-cell-padding-3.0.0.tgz#a769ba1999984ff5f90294fb6ccb8aead7e8a12f"
+  integrity sha512-sEKrbyFZPZpxI39R8/r+CwUrin9YtyRwVn0SQkNQEZWZcIpylK+bvoKIldvLIXQPob+ZxklL0GPVRzotQMwuWQ==
   dependencies:
     unified-lint-rule "^1.0.0"
     unist-util-generated "^1.1.0"
@@ -1024,14 +1023,14 @@ remark-parse@^8.0.0:
     vfile-location "^3.0.0"
     xtend "^4.0.1"
 
-remark-preset-lint-consistent@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/remark-preset-lint-consistent/-/remark-preset-lint-consistent-3.0.1.tgz#58aaf9d5d6606c285929eba3af1bde90324cf343"
-  integrity sha512-Q+i6iSHvEtklZHcrTcRzNy96gRUqnNXkVsZAiH1J06jrkarBoSakQOkWD5gpR7tGbfr9VchrntdWY+n0YSf9Ww==
+remark-preset-lint-consistent@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/remark-preset-lint-consistent/-/remark-preset-lint-consistent-4.0.0.tgz#5686ac8477988834f40b514d9d805392eca6a103"
+  integrity sha512-1euNZfRanM3wysHAR0vYX6uMbbKTlmTc+QvrymgRayKV8uhslQBISa+XduWk7mSz68ylS8CRR7JGvBfi6kDQjg==
   dependencies:
-    remark-lint "^7.0.0"
+    remark-lint "^8.0.0"
     remark-lint-blockquote-indentation "^2.0.0"
-    remark-lint-checkbox-character-style "^2.0.0"
+    remark-lint-checkbox-character-style "^3.0.0"
     remark-lint-code-block-style "^2.0.0"
     remark-lint-emphasis-marker "^2.0.0"
     remark-lint-fenced-code-marker "^2.0.0"
@@ -1041,7 +1040,7 @@ remark-preset-lint-consistent@^3.0.1:
     remark-lint-ordered-list-marker-style "^2.0.0"
     remark-lint-rule-style "^2.0.0"
     remark-lint-strong-marker "^2.0.0"
-    remark-lint-table-cell-padding "^2.0.0"
+    remark-lint-table-cell-padding "^3.0.0"
 
 remark-preset-lint-recommended@^4.0.1:
   version "4.0.1"
