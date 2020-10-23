@@ -205,7 +205,6 @@ There is a little difference between __arguments__ and __parameters__:
 ## Higher-Order Functions (HOF)
 
 A function that takes a function as an argument and/or returns a function, basically we can treat functions as a value.
-In Python every function/method is a Higher-Order Function.
 
 The functions like `reduce`, `map` and `filter` are good examples of __HOF__, they receive a function as their first argument.
 ```python
