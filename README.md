@@ -607,14 +607,14 @@ You can have a look at the real-life [`Functor` interface](https://github.com/dr
 >>> _NewFirstType = TypeVar('_NewFirstType')
 
 >>> class Box(SupportKind1['Box', _FirstType], Functor[_FirstType]):
-... def __init__(self, inner_value: _FirstType) -> None:
-...     self._inner_value = inner_value
-
->>> def map(
-...     self,
-...     function: Callable[[_FirstType], _NewFirstType],
-... ) -> 'Box[_NewFirstType]':
-...     return Box(function(self._inner_value))
+...     def __init__(self, inner_value: _FirstType) -> None:
+...         self._inner_value = inner_value
+...
+...     def map(
+...         self,
+...         function: Callable[[_FirstType], _NewFirstType],
+...     ) -> 'Box[_NewFirstType]':
+...         return Box(function(self._inner_value))
 
 >>> assert Box(-5).map(abs) == Box(5)
 >>>
