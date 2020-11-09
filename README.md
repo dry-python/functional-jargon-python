@@ -615,6 +615,9 @@ You can have a look at the real-life [`Functor` interface](https://github.com/dr
 ...         function: Callable[[_FirstType], _NewFirstType],
 ...     ) -> 'Box[_NewFirstType]':
 ...         return Box(function(self._inner_value))
+...
+...     def __eq__(self, other) -> bool:
+...         return type(other) == type(self) and self._inner_value == other._inner_value
 
 >>> assert Box(-5).map(abs) == Box(5)
 >>>
@@ -676,14 +679,6 @@ A monad is an [Applicative Functor](#applicative-functor) with `bind` method.
 ## Comonad (TODO)
 
 An object that has `extract` and `extend` functions.
-
-```python
-# TODO
-```
-
-## Applicative Functor (TODO)
-
-An applicative functor is an object with an `ap` function. `ap` applies a function in the object to a value in another object of the same type.
 
 ```python
 # TODO
