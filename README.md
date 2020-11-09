@@ -34,8 +34,8 @@ __Table of Contents__
 * [Lambda (TODO)](#lambda-todo)
 * [Lambda Calculus (TODO)](#lambda-calculus-todo)
 * [Lazy evaluation (TODO)](#lazy-evaluation-todo)
-* [Functor (TODO)](#functor-todo)
-* [Applicative Functor (TODO)](#applicative-functor-todo)
+* [Functor](#functor)
+* [Applicative Functor](#applicative-functor)
 * [Monoid](#monoid)
 * [Monad (TODO)](#monad-todo)
 * [Comonad (TODO)](#comonad-todo)
@@ -579,28 +579,61 @@ Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluatio
 # TODO
 ```
 
-## Functor (TODO)
+## Functor
 
-An object that implements a `map` function which, while running over each value in the object to produce a new object, adheres to two rules:
+An object that implements a `map` method which, while running over each value in the object to produce a new object, adheres to two rules:
 
-__Preserves identity__
-```
-object.map(x => x) ≍ object
-```
-
-__Composable__
-
-```
-object.map(compose(f, g)) ≍ object.map(g).map(f)
-```
+__Identity law__
 
 ```python
-# TODO
+functor.map(lambda x: x) == functor
 ```
 
-## Pointed Functor (TODO)
+__Associative law__
 
-## Applicative Functor (TODO)
+```python
+functor.map(compose(f, g)) == functor.map(g).map(f)
+```
+
+Sometimes `Functor` can be called `Mappable` to its `.map` method.
+You can have a look at the real-life [`Functor` interface](https://github.com/dry-python/returns/blob/master/returns/interfaces/mappable.py):
+
+```python
+>>> from typing import Callable, TypeVar
+>>> from returns.interfaces.mappable import Mappable1 as Functor
+>>> from returns.primitives.hkt import SupportsKind1
+
+>>> _FirstType = TypeVar('_FirstType')
+>>> _NewFirstType = TypeVar('_NewFirstType')
+
+>>> class Box(SupportKind1['Box', _FirstType], Functor[_FirstType]):
+... def __init__(self, inner_value: _FirstType) -> None:
+...     self._inner_value = inner_value
+
+>>> def map(
+...     self,
+...     function: Callable[[_FirstType], _NewFirstType],
+... ) -> 'Box[_NewFirstType]':
+...     return Box(function(self._inner_value))
+
+>>> assert Box(-5).map(abs) == Box(5)
+>>>
+```
+
+__Further reading:__
+
+- [Functor interface docs](https://returns.readthedocs.io/en/latest/pages/interfaces.html#mappable)
+
+
+## Applicative Functor
+
+An Applicative Functor is an object with `apply` and `.from_value` methods:
+- `.apply` applies a function in the object to a value in another object of the same type. Somethimes this method is also called `ap`
+- `.from_value` creates a new Applicative Functor from a pure value. Sometimes this method is also called `pure`
+
+All Applicative Functors must also follow [a bunch of laws](https://returns.readthedocs.io/en/latest/pages/interfaces.html#applicative).
+
+You can have a look at the real-life [`Applicative Functor` interface](https://github.com/dry-python/returns/blob/master/returns/interfaces/applicative.py).
 
 
 ## Monoid
