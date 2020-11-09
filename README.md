@@ -515,7 +515,7 @@ Constants are [referentially transparent](#referential-transparency-todo). That 
 
 ## Lift (TODO)
 
-Lifting is when you take a value and put it into an object like a [functor](#pointed-functor-todo). If you lift a function into an [Applicative Functor](#applicative-functor-todo) then you can make it work on values that are also in that functor.
+Lifting is when you take a value and put it into an object like a [Functor](#functor). If you lift a function into an [Applicative Functor](#applicative-functor) then you can make it work on values that are also in that functor.
 
 Some implementations have a function called `lift`, or `liftA2` to make it easier to run functions on functors.
 
@@ -633,7 +633,9 @@ An Applicative Functor is an object with `apply` and `.from_value` methods:
 
 All Applicative Functors must also follow [a bunch of laws](https://returns.readthedocs.io/en/latest/pages/interfaces.html#applicative).
 
-You can have a look at the real-life [`Applicative Functor` interface](https://github.com/dry-python/returns/blob/master/returns/interfaces/applicative.py).
+__Further reading:__
+
+- [`Applicative Functor` interface docs](https://github.com/dry-python/returns/blob/master/returns/interfaces/applicative.py)
 
 
 ## Monoid
@@ -661,7 +663,8 @@ Tuples, lists, and strings are also monoids:
 
 ## Monad (TODO)
 
-A monad is an object with [`of`](#pointed-functor-todo) and `chain` functions. `chain` is like [`map`](#functor-todo) except it un-nests the resulting nested object.
+A monad is an [Applicative Functor](#applicative-functor) with `bind` method. 
+`bind` is like [`map`](#functor) except it un-nests the resulting nested object.
 
 ```python
 # TODO
