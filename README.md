@@ -22,7 +22,7 @@ __Table of Contents__
 * [Currying](#currying)
 * [Function Composition](#function-composition)
 * [Continuation (TODO)](#continuation-todo)
-* [Point-Free Style (TODO)](#point-free-style-todo)
+* [Point-Free Style](#point-free-style)
 * [Predicate](#predicate)
 * [Contracts (TODO)](#contracts-todo)
 * [Category (TODO)](#category-todo)
@@ -429,15 +429,46 @@ Continuations are often seen in asynchronous programming when the program needs 
 ```
 
 
-## Point-Free Style (TODO)
+## Point-Free Style
 
-Writing functions where the definition does not explicitly identify the arguments used. This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). A.K.A Tacit programming.
+Point-Free is a style of writting code without using any intermediate variables.
 
-```python
-# TODO
+Basically, you will end up with long chains of direct function calls.
+This style usually requires [currying](#currying) or other [Higher-Order functions](#higher-order-functions-hof). 
+This technique is also sometimes called "Tacit programming".
+
+The most common example of Point-Free programming style is Unix with pipes:
+
+```bash
+ps aux | grep [k]de | gawk '{ print $2 }'
 ```
 
-Points-free function definitions look just like normal assignments without `def` or `lambda`.
+It also works for Python, let's say you have this function composition:
+
+```python
+>>> str(bool(abs(-1)))
+'True'
+```
+
+It might be problematic method methods on the first sight, because you need an instance to call a method on.
+But, you can always use HOF to fix that and compose normally:
+
+```python
+>>> from returns.pipeline import flow
+>>> from returns.pointfree import map_
+>>> from returns.result import Success
+
+>>> assert flow(
+...     Success(-2)
+...     map_(abs),
+...     map_(range),
+...     map_(list),
+... ) == Success([0, 1])
+>>>
+```
+
+__Further reading:__
+* [Pointfree docs](https://returns.readthedocs.io/en/latest/pages/pointfree.html)
 
 
 ## Predicate
