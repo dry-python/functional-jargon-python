@@ -460,7 +460,7 @@ But, you can always use HOF to fix that and compose normally:
 >>> from returns.result import Success
 
 >>> assert flow(
-...     Success(-2)
+...     Success(-2),
 ...     map_(abs),
 ...     map_(range),
 ...     map_(list),
