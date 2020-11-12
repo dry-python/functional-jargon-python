@@ -448,6 +448,7 @@ It also works for Python, let's say you have this function composition:
 ```python
 >>> str(bool(abs(-1)))
 'True'
+>>>
 ```
 
 It might be problematic method methods on the first sight, because you need an instance to call a method on.
