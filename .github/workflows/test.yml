@@ -7,7 +7,7 @@ jobs:
     name: doctests with pytest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
@@ -23,7 +23,7 @@ jobs:
     name: remark check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: yarn install
         uses: borales/actions-yarn@v2.3.0
@@ -38,7 +38,7 @@ jobs:
     name: misspell check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: misspell run
         uses: sobolevn/misspell-fixer-action@master
