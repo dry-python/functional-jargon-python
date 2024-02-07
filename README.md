@@ -1,7 +1,5 @@
 # Functional Programming Jargon
 
-[![Build Status](https://github.com/dry-python/functional-jargon-python/workflows/test/badge.svg?event=push)](https://github.com/dry-python/functional-jargon-python/actions?query=workflow%3Atest)
-
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
 This is a fork of [Functional Programming Jargon](https://github.com/jmesyou/functional-programming-jargon).
@@ -17,48 +15,48 @@ __Table of Contents__
 * [Arity](#arity)
 * [IO](#io)
 * [Higher-Order Functions (HOF)](#higher-order-functions-hof)
-* [Closure (TODO)](#closure-todo)
+* [Closure](#closure)
 * [Partial Application](#partial-application)
 * [Currying](#currying)
 * [Function Composition](#function-composition)
-* [Continuation (TODO)](#continuation-todo)
+* [Continuation](#continuation)
 * [Point-Free Style](#point-free-style)
 * [Predicate](#predicate)
-* [Contracts (TODO)](#contracts-todo)
-* [Category (TODO)](#category-todo)
-* [Value (TODO)](#value-todo)
-* [Constant (TODO)](#constant-todo)
-* [Lift (TODO)](#lift-todo)
-* [Referential Transparency (TODO)](#referential-transparency-todo)
-* [Equational Reasoning (TODO)](#equational-reasoning-todo)
-* [Lambda (TODO)](#lambda-todo)
-* [Lambda Calculus (TODO)](#lambda-calculus-todo)
-* [Lazy evaluation (TODO)](#lazy-evaluation-todo)
+* [Contracts](#contracts)
+* [Category](#category)
+* [Value](#value)
+* [Constant](#constant)
+* [Lift](#lift)
+* [Referential Transparency](#referential-transparency)
+* [Equational Reasoning](#equational-reasoning)
+* [Lambda](#lambda)
+* [Lambda Calculus](#lambda-calculus)
+* [Lazy evaluation](#lazy-evaluation)
 * [Functor](#functor)
 * [Applicative Functor](#applicative-functor)
 * [Monoid](#monoid)
-* [Monad (TODO)](#monad-todo)
-* [Comonad (TODO)](#comonad-todo)
-* [Morphism (TODO)](#morphism-todo)
-  * [Endomorphism (TODO)](#endomorphism-todo)
-  * [Isomorphism (TODO)](#isomorphism-todo)
-  * [Homomorphism (TODO)](#homomorphism-todo)
-  * [Catamorphism (TODO)](#catamorphism-todo)
-  * [Anamorphism (TODO)](#anamorphism-todo)
-  * [Hylomorphism (TODO)](#hylomorphism-todo)
-  * [Paramorphism (TODO)](#paramorphism-todo)
-  * [Apomorphism (TODO)](#apomorphism-todo)
-* [Setoid (TODO)](#setoid-todo)
-* [Semigroup (TODO)](#semigroup-todo)
-* [Foldable (TODO)](#foldable-todo)
-* [Lens (TODO)](#lens-todo)
-* [Type Signatures (TODO)](#type-signatures-todo)
-* [Algebraic data type (TODO)](#algebraic-data-type-todo)
-  * [Sum type (TODO)](#sum-type-todo)
-  * [Product type (TODO)](#product-type-todo)
-* [Option (TODO)](#option-todo)
-* [Function (TODO)](#function-todo)
-* [Partial function (TODO)](#partial-function-todo)
+* [Monad](#monad)
+* [Comonad](#comonad)
+* [Morphism](#morphism)
+  * [Endomorphism](#endomorphism)
+  * [Isomorphism](#isomorphism)
+  * [Homomorphism](#homomorphism)
+  * [Catamorphism](#catamorphism)
+  * [Anamorphism](#anamorphism)
+  * [Hylomorphism](#hylomorphism)
+  * [Paramorphism](#paramorphism)
+  * [Apomorphism](#apomorphism)
+* [Setoid](#setoid)
+* [Semigroup](#semigroup)
+* [Foldable](#foldable)
+* [Lens](#lens)
+* [Type Signatures](#type-signatures)
+* [Algebraic data type](#algebraic-data-type)
+  * [Sum type](#sum-type)
+  * [Product type](#product-type)
+* [Option](#option)
+* [Function](#function)
+* [Partial function](#partial-function)
 
 
 <!-- /RM -->
@@ -266,13 +264,19 @@ __Further reading__:
 A closure is a way of accessing a variable outside its scope.
 Formally, a closure is a technique for implementing lexically scoped named binding. It is a way of storing a function with an environment.
 
-A closure is a scope which captures local variables of a function for access even after the execution has moved out of the block in which it is defined.
-ie. they allow referencing a scope after the block in which the variables were declared has finished executing.
-
+A closure is a function that remembers the environment in which it was created. This means that it can access variables that were in scope at the time of the closure's creation, even after the block in which those variables were declared has finished executing.
 
 ```python
-# TODO
+def make_adder(x):
+    def adder(y):
+        return x + y
+    return adder
+
+add_five = make_adder(5)
+assert add_five(10) == 15
 ```
+
+In the example above, `make_adder` returns a new function `adder` that takes a single argument `y`. The `adder` function adds `y` to `x`, where `x` is a parameter of the parent function `make_adder`. Even after `make_adder` has finished execution, `adder` remembers the value of `x` that was passed to `make_adder`.
 
 Lexical scoping is the reason why it is able to find the values of x and add - the private variables of the parent which has finished executing. This value is called a Closure.
 
@@ -414,19 +418,49 @@ __Further reading__
 * [`compose` docs](https://returns.readthedocs.io/en/latest/pages/functions.html#compose)
 
 
-## Continuation (TODO)
+## Continuation
 
-At any given point in a program, the part of the code that's yet to be executed is known as a continuation.
+A continuation represents the future of a computation. It is a way of structuring some parts of a program so that the execution can be paused and resumed. Continuations are a deep concept that can be used to implement advanced control structures, such as coroutines, exception handling, or backtracking.
+
+In Python, continuations can be implemented using generators:
 
 ```python
-# TODO
+def print_numbers():
+    for i in range(5):
+        print(i)
+        yield
+
+gen = print_numbers()  # Create a generator
+next(gen)  # Prints 0 and pauses
+next(gen)  # Resumes and prints 1
 ```
+
+In this example, the `yield` statement is used to pause the execution of `print_numbers`. Each call to `next` on the generator resumes where the function left off.
 
 Continuations are often seen in asynchronous programming when the program needs to wait to receive data before it can continue. The response is often passed off to the rest of the program, which is the continuation, once it's been received.
 
 ```python
-# TODO
+import asyncio
+
+async def fetch_data():
+    print("Start fetching")
+    await asyncio.sleep(2)  # Simulate an I/O operation e.g., fetching data from a database
+    print("Done fetching")
+    return {'data': 123}
+
+async def main_continuation():
+    # The continuation is here after the data is fetched
+    data = await fetch_data()
+    # The rest of the code is the continuation of the fetch_data function
+    print(f"Received data: {data}")
+
+# Run the main_continuation coroutine
+asyncio.run(main_continuation())
 ```
+
+In this example, `fetch_data` is an asynchronous function that simulates a delay (such as a network request) with `await asyncio.sleep(2)`. The `await` keyword is used to wait for the completion of `fetch_data` without blocking the entire program. Once `fetch_data` is complete, the execution continues with the next line, which is effectively the continuation of the `fetch_data` operation.
+
+The `main_continuation` function awaits the result of `fetch_data` and then processes the data, which is the continuation after the asynchronous operation has completed. The `asyncio.run(main_continuation())` call at the bottom is used to run the main coroutine, which in turn waits for the `fetch_data` coroutine.
 
 
 ## Point-Free Style
@@ -492,124 +526,170 @@ __Futher reading__
 * [`cond` docs](https://returns.readthedocs.io/en/latest/pages/pointfree.html#cond)
 
 
-## Contracts (TODO)
+## Contracts
 
-A contract specifies the obligations and guarantees of the behavior from a function or expression at runtime. This acts as a set of rules that are expected from the input and output of a function or expression, and errors are generally reported whenever a contract is violated.
+A contract in programming specifies the obligations and guarantees of the behavior from a function or expression at runtime. This can be implemented in Python using assertions that serve as runtime checks.
 
 ```python
-# TODO
+def add_positive_numbers(x, y):
+    assert x > 0 and y > 0, "Both numbers must be positive"
+    return x + y
+
+add_positive_numbers(1, 1)  # Works fine
+add_positive_numbers(-1, 1)  # Raises an AssertionError
 ```
 
-## Category (TODO)
+In the example above, the contract is that both `x` and `y` must be positive numbers. The `assert` statement checks this contract at runtime.
 
-A category in category theory is a collection of objects and morphisms between them. In programming, typically types
-act as the objects and functions as morphisms.
+## Category
 
-To be a valid category 3 rules must be met:
+In programming, a category consists of objects and morphisms (functions) between these objects. Categories must satisfy three properties:
 
-1. There must be an identity morphism that maps an object to itself.
-    Where `a` is an object in some category,
-    there must be a function from `a -> a`.
-2. Morphisms must compose.
-    Where `a`, `b`, and `c` are objects in some category,
-    and `f` is a morphism from `a -> b`, and `g` is a morphism from `b -> c`;
-    `g(f(x))` must be equivalent to `(g • f)(x)`.
-3. Composition must be associative
-    `f • (g • h)` is the same as `(f • g) • h`
+1. Composition: Morphisms can be composed, and the composition is associative.
+2. Identity: Each object has an identity morphism that acts as a no-op.
+3. Closure: The composition of two morphisms is also a morphism in the category.
 
 Since these rules govern composition at very abstract level, category theory is great at uncovering new ways of composing things.
+
+In Python, we can think of types as objects and functions as morphisms:
+
+```python
+def identity(x):
+    return x
+
+def compose(f, g):
+    return lambda x: f(g(x))
+
+# The identity function acts as a no-op morphism.
+assert identity(5) == 5
+
+# The composition of two functions is also a function.
+f = lambda x: x + 1
+g = lambda x: x * 2
+assert compose(f, g)(5) == 11
+```
 
 __Further reading__
 
 * [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/)
 
-## Value (TODO)
+## Value
 
-Anything that can be assigned to a variable.
-
-```python
-# TODO
-```
-
-## Constant (TODO)
-
-A variable that cannot be reassigned once defined.
+In programming, a value is anything that can be assigned to a variable or passed to a function as an argument. In Python, values can be of various types, such as numbers, strings, lists, or even functions.
 
 ```python
-# TODO
+x = 42  # 42 is a value
+y = "hello"  # "hello" is a value
+z = [1, 2, 3]  # [1, 2, 3] is a value
 ```
 
-Constants are [referentially transparent](#referential-transparency-todo). That is, they can be replaced with the values that they represent without affecting the result.
+## Constant
+
+A constant is a value that cannot be altered by the program during normal execution. In Python, constants are usually defined at the module level and written in all capital letters:
 
 ```python
-# TODO
+PI = 3.14159
+
+def circumference(radius):
+    return 2 * PI * radius
+
+# PI is a constant, its value should not be changed.
 ```
 
-## Lift (TODO)
+## Lift
 
-Lifting is when you take a value and put it into an object like a [Functor](#functor). If you lift a function into an [Applicative Functor](#applicative-functor) then you can make it work on values that are also in that functor.
+Lifting is a concept in functional programming where you take a function that operates on values and transform it into a function that operates on values inside a context (like a container or a monad).
 
-Some implementations have a function called `lift`, or `liftA2` to make it easier to run functions on functors.
+For example, if you have a function `add` that adds two numbers, you can lift this function to operate on lists of numbers:
 
 ```python
-# TODO
+def add(x, y):
+    return x + y
+
+def lift_to_list(f):
+    return lambda x, y: [f(a, b) for a, b in zip(x, y)]
+
+add_lists = lift_to_list(add)
+assert add_lists([1, 2], [3, 4]) == [4, 6]
 ```
 
-Lifting a one-argument function and applying it does the same thing as `map`.
+In this example, `lift_to_list` takes a function `f` and returns a new function that applies `f` to corresponding elements of two lists.
+
+## Referential Transparency
+
+An expression is referentially transparent if it can be replaced with its corresponding value without changing the program's behavior. This concept is a key feature of pure functions in functional programming.
 
 ```python
-# TODO
+def square(x):
+    return x * x
+
+# The function call square(2) is referentially transparent,
+# because it can be replaced with its result, 4, without changing the meaning.
+assert square(2) == 4
 ```
 
+In the example above, `square(2)` is referentially transparent because we can replace it with `4` anywhere in our code without affecting the outcome.
 
-## Referential Transparency (TODO)
+## Equational Reasoning
 
-An expression that can be replaced with its value without changing the
-behavior of the program is said to be referentially transparent.
-
-Say we have function greet:
+Equational reasoning is a technique used in functional programming to reason about program behavior. It relies on the substitution of expressions with their equivalent values, which is possible due to referential transparency.
 
 ```python
-# TODO
+def add(a, b):
+    return a + b
+
+def square(x):
+    return x * x
+
+# We can reason that:
+# square(add(1, 2)) == square(3) == 9
+# This is possible because both add and square are pure functions.
+assert square(add(1, 2)) == 9
 ```
 
-## Equational Reasoning (TODO)
+In this example, we can substitute `add(1, 2)` with `3` and `square(3)` with `9`, allowing us to reason about the code's behavior in a straightforward way.
 
-When an application is composed of expressions and devoid of side effects, truths about the system can be derived from the parts.
+## Lambda
 
-## Lambda (TODO)
-
-An anonymous function that can be treated like a value.
-
-```python 
-def f(a):
-  return a + 1
-
-lambda a: a + 1
-```
-Lambdas are often passed as arguments to Higher-Order functions.
+A lambda is an anonymous function that can be defined inline and passed around as a value.
 
 ```python
-List([1, 2]).map(lambda x: x + 1) # [2, 3]
+# A lambda function that adds 1 to its argument
+add_one = lambda x: x + 1
+
+# Lambdas are often used in higher-order functions
+numbers = [1, 2, 3]
+incremented_numbers = list(map(lambda x: x + 1, numbers))
+assert incremented_numbers == [2, 3, 4]
 ```
 
-You can assign a lambda to a variable.
+In the example above, `lambda x: x + 1` is a lambda function that increments its input by 1.
+
+## Lambda Calculus
+
+Lambda calculus is a formal system in mathematical logic for expressing computation based on function abstraction and application using variable binding and substitution. It is a universal model of computation that can be used to simulate any Turing machine.
 
 ```python
-add1 = lambda a: a + 1
+# Lambda calculus is not directly implemented in Python,
+# but Python's functions and lambdas are inspired by it.
 ```
 
-## Lambda Calculus (TODO)
+## Lazy evaluation
 
-A branch of mathematics that uses functions to create a [universal model of computation](https://en.wikipedia.org/wiki/Lambda_calculus).
-
-## Lazy evaluation (TODO)
-
-Lazy evaluation is a call-by-need evaluation mechanism that delays the evaluation of an expression until its value is needed. In functional languages, this allows for structures like infinite lists, which would not normally be available in an imperative language where the sequencing of commands is significant.
+Lazy evaluation is a strategy that delays the evaluation of an expression until its value is needed. It can improve performance by avoiding unnecessary calculations, and it can create potential for infinite data structures.
 
 ```python
-# TODO
+def lazy_add(a, b):
+    def compute():
+        return a + b
+    return compute
+
+# The sum is not computed until we call the returned function.
+sum_function = lazy_add(1, 2)
+assert sum_function() == 3
 ```
+
+In this example, `lazy_add` returns a function that, when called, computes the sum of `a` and `b`. The sum is not computed until `compute` is called.
 
 ## Functor
 
@@ -695,200 +775,441 @@ Tuples, lists, and strings are also monoids:
 >>>
 ```
 
+## Monad
 
-## Monad (TODO)
-
-A monad is an [Applicative Functor](#applicative-functor) with `bind` method. 
-`bind` is like [`map`](#functor) except it un-nests the resulting nested object.
+A monad is a design pattern used to handle program-wide concerns (like state or I/O) in a functional way. It's an object with `bind` and `return` methods that follow certain laws.
 
 ```python
-# TODO
+class Monad:
+    def __init__(self, value):
+        self.value = value
+
+    def bind(self, func):
+        return func(self.value)
+
+    def return_(self):
+        return self
+
+# Example usage:
+# Let's say we have a monad instance `m` and a function `f` that returns a monad.
+# We can apply `f` to the value wrapped by `m` using `bind`:
+# m.bind(f)
 ```
 
-`of` is also known as `return` in other functional languages.
-`chain` is also known as `flatmap` and `bind` in other languages.
+In Python, monads are not as prevalent as in languages like Haskell, but the concept can still be applied.
 
-## Comonad (TODO)
+## Comonad
 
-An object that has `extract` and `extend` functions.
+A comonad is conceptually the dual of a monad. It provides a way to extract a value from a context and extend a computation across a context.
 
 ```python
-# TODO
+class Comonad:
+    def __init__(self, value):
+        self.value = value
+
+    def extract(self):
+        return self.value
+
+    def extend(self, func):
+        return Comonad(func(self))
+
+# Example usage:
+# Given a comonad `w` and a function `f` that takes a comonad and returns a value,
+# we can create a new comonad with the result of applying `f` to `w` using `extend`:
+# w.extend(f)
 ```
 
-## Morphism (TODO)
+Comonads are less common in everyday programming but can be useful in certain contexts like functional reactive programming.
 
-A transformation function.
+## Morphism
 
-### Endomorphism (TODO)
+### Endomorphism
 
-A function where the input type is the same as the output.
+An endomorphism is a function where the input type is the same as the output type.
 
 ```python
-# uppercase :: String -> String
-uppercase = lambda s: s.upper() 
+# An endomorphism that converts a string to uppercase
+def to_uppercase(s: str) -> str:
+    return s.upper()
 
-# decrement :: Number -> Number
-decrement = lambda x: x - 1
+# An endomorphism that decrements a number
+def decrement(x: int) -> int:
+    return x - 1
 ```
 
-### Isomorphism (TODO)
+### Isomorphism
 
-A pair of transformations between 2 types of objects that is structural in nature and no data is lost.
+An isomorphism consists of two functions that are inverses of each other. They allow for lossless conversion between two types.
 
 ```python
-# TODO
+def to_str(n: int) -> str:
+    return str(n)
+
+def to_int(s: str) -> int:
+    return int(s)
+
+# to_str and to_int are isomorphisms if we ignore the fact that not all strings can be converted to integers.
+assert to_int(to_str(42)) == 42
+assert to_str(to_int("42")) == "42"
 ```
 
-### Homomorphism (TODO)
+### Homomorphism
 
-A homomorphism is just a structure preserving map. In fact, a functor is just a homomorphism between categories as it preserves the original category's structure under the mapping.
+A homomorphism is a structure-preserving map between two algebraic structures.
 
 ```python
-# TODO
+# A homomorphism between (integers under addition) and (strings under concatenation)
+def add_to_str(x: int, y: int) -> str:
+    return str(x + y)
+
+assert add_to_str(1, 2) == "3"
 ```
 
-### Catamorphism (TODO)
+### Catamorphism
 
-A `reduce_right` function that applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value.
+A catamorphism is a way to deconstruct data structures into a single value.
 
 ```python
-# TODO
+from functools import reduce
+
+# A catamorphism that sums a list of numbers
+def sum_list(numbers: list) -> int:
+    return reduce(lambda acc, x: acc + x, numbers, 0)
+
+assert sum_list([1, 2, 3]) == 6
 ```
 
-### Anamorphism (TODO)
+### Anamorphism
 
-An `unfold` function. An `unfold` is the opposite of `fold` (`reduce`). It generates a list from a single value.
+An anamorphism is a way to construct data structures from a single value.
 
 ```python
-# TODO
+def unfold(predicate, function, seed):
+    result = []
+    while predicate(seed):
+        value, seed = function(seed)
+        result.append(value)
+    return result
+
+# An anamorphism that generates a range of numbers
+def range_anamorphism(start, stop):
+    return unfold(lambda x: x < stop, lambda x: (x, x + 1), start)
+
+assert range_anamorphism(0, 5) == [0, 1, 2, 3, 4]
 ```
 
-### Hylomorphism (TODO)
+### Hylomorphism
 
-The combination of anamorphism and catamorphism.
-
-### Paramorphism (TODO)
-
-A function just like `reduce_right`. However, there's a difference:
-
-In paramorphism, your reducer's arguments are the current value, the reduction of all previous values, and the list of values that formed that reduction.
+A hylomorphism is a combination of an anamorphism and a catamorphism.
 
 ```python
-# TODO
+# A hylomorphism that constructs a range of numbers and then sums them
+def hylo_range_sum(start, stop):
+    return sum_list(range_anamorphism(start, stop))
+
+assert hylo_range_sum(0, 5) == 10
 ```
 
-### Apomorphism (TODO)
+### Paramorphism
 
-it's the opposite of paramorphism, just as anamorphism is the opposite of catamorphism. Whereas with paramorphism, you combine with access to the accumulator and what has been accumulated, apomorphism lets you `unfold` with the potential to return early.
-
-## Setoid (TODO)
-
-An object that has an `equals` function which can be used to compare other objects of the same type.
-
-Make array a setoid:
-
-```python 
-# TODO
-```
-
-## Semigroup (TODO)
-
-An object that has a `concat` function that combines it with another object of the same type.
+A paramorphism is a recursive function that has access to the results of the recursive call and the original data structure.
 
 ```python
-# TODO
+def para(numbers, acc=0):
+    if not numbers:
+        return acc
+    head, *tail = numbers
+    return para(tail, acc + head)
+
+# A paramorphism that sums a list of numbers
+assert para([1, 2, 3, 4]) == 10
 ```
 
-## Foldable (TODO)
+### Apomorphism
 
-An object that has a `reduce` function that applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+An apomorphism is a dual to paramorphism, allowing for early termination in an unfold.
 
 ```python
-# TODO
+def apo(predicate, function, seed):
+    result = []
+    while predicate(seed):
+        value, seed, done = function(seed)
+        result.append(value)
+        if done:
+            break
+    return result
+
+# An apomorphism that generates a range of numbers but can stop early
+def range_apomorphism(start, stop, early_stop):
+    return apo(
+        lambda x: x < stop,
+        lambda x: (x, x + 1, x >= early_stop),
+        start
+    )
+
+assert range_apomorphism(0, 10, 5) == [0, 1, 2, 3, 4]
 ```
 
-## Lens (TODO)
+## Setoid
 
-A lens is a structure (often an object or function) that pairs a getter and a non-mutating setter for some other data
-structure.
+A setoid is an object that has an `equals` method which can be used to compare other objects of the same type for equality.
 
 ```python
-# TODO
+class Setoid:
+    def __init__(self, value):
+        self.value = value
+
+    def equals(self, other):
+        return self.value == other.value
+
+# Example usage:
+a = Setoid(1)
+b = Setoid(1)
+c = Setoid(2)
+
+assert a.equals(b)
+assert not a.equals(c)
 ```
 
-Lenses are also composable. This allows easy immutable updates to deeply nested data.
+## Semigroup
+
+A semigroup is an algebraic structure with a `concat` method that combines it with another object of the same type.
 
 ```python
-# TODO
+class Semigroup:
+    def __init__(self, value):
+        self.value = value
+
+    def concat(self, other):
+        return Semigroup(self.value + other.value)
+
+# Example usage:
+a = Semigroup("Hello, ")
+b = Semigroup("World!")
+
+assert a.concat(b).value == "Hello, World!"
 ```
 
-## Type Signatures (TODO)
+## Foldable
 
-__Further reading__
-* [Ramda's type signatures](https://github.com/ramda/ramda/wiki/Type-Signatures)
-* [Mostly Adequate Guide](https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch7.html#whats-your-type)
-* [What is Hindley-Milner?](http://stackoverflow.com/a/399392/22425) on Stack Overflow
-
-## Algebraic data type (TODO)
-
-A composite type made from putting other types together. Two common classes of algebraic types are [sum](#sum-type-todo) and [product](#product-type-todo).
-
-### Sum type (TODO)
-
-A Sum type is the combination of two types together into another one. It is called sum because the number of possible values in the result type is the sum of the input types.
+A foldable is an object that has a `reduce` method that applies a function against an accumulator and each element in the object to reduce it to a single value.
 
 ```python
-# TODO
+class Foldable(list):
+    def reduce(self, function, initial):
+        accumulator = initial
+        for value in self:
+            accumulator = function(accumulator, value)
+        return accumulator
+
+# Example usage:
+numbers = Foldable([1, 2, 3, 4])
+sum_of_numbers = numbers.reduce(lambda acc, x: acc + x, 0)
+
+assert sum_of_numbers == 10
 ```
 
-Sum types are sometimes called union types, discriminated unions, or tagged unions.
+## Lens
 
-The [sumtypes](https://github.com/radix/sumtypes/) library in Python helps with defining and using union types.
-
-### Product type (TODO)
-
-A __product__ type combines types together in a way you're probably more familiar with:
+A lens is a composable structure that pairs a getter and a setter for an immutable update of a data structure.
 
 ```python
-# TODO
+class Lens:
+    def __init__(self, getter, setter):
+        self._getter = getter
+        self._setter = setter
+
+    def view(self, data):
+        return self._getter(data)
+
+    def set(self, data, value):
+        return self._setter(data, value)
+
+    def over(self, data, function):
+        return self.set(data, function(self.view(data)))
+
+# Example usage:
+name_lens = Lens(lambda data: data['name'], lambda data, value: {**data, 'name': value})
+person = {'name': 'Alice', 'age': 25}
+
+assert name_lens.view(person) == 'Alice'
+assert name_lens.set(person, 'Bob') == {'name': 'Bob', 'age': 25}
 ```
 
-See also [Set theory](https://en.wikipedia.org/wiki/Set_theory).
-
-## Option (TODO)
-
-Option is a [sum type](#sum-type-todo) with two cases often called `Some` and `None`.
-
-Option is useful for composing functions that might not return a value.
+Lenses can be composed to focus on nested data structures.
 
 ```python
-# TODO
+# Composing lenses to focus on nested structures
+address_lens = Lens(lambda data: data['address'], lambda data, value: {**data, 'address': value})
+street_lens = Lens(lambda data: data['street'], lambda data, value: {**data, 'street': value})
+
+full_address_lens = address_lens.compose(street_lens)
+person_with_address = {'name': 'Alice', 'address': {'street': '123 Main St', 'city': 'Anytown'}}
+
+assert full_address_lens.view(person_with_address) == '123 Main St'
 ```
 
-`Option` is also known as `Maybe`. `Some` is sometimes called `Just`. `None` is sometimes called `Nothing`.
+## Type Signatures
 
-## Function (TODO)
-
-A __function__ `f :: A => B` is an expression - often called arrow or lambda expression - with __exactly one (immutable)__ parameter of type `A` and __exactly one__ return value of type `B`. That value depends entirely on the argument, making functions context-independent, or [referentially transparent](#referential-transparency-todo). What is implied here is that a function must not produce any hidden [side effects](#side-effects) - a function is always [pure](#purity), by definition. These properties make functions pleasant to work with: they are entirely deterministic and therefore predictable. Functions enable working with code as data, abstracting over behaviour:
+Type signatures are annotations that specify the types of inputs and outputs for functions. They help in understanding how a function can be used and are essential for static type checking.
 
 ```python
-# TODO
+from typing import List, Callable
+
+# Type signature for a function that takes an integer and returns a string
+def int_to_str(x: int) -> str:
+    return str(x)
+
+# Type signature for a higher-order function that takes a function as an argument
+def apply_function(f: Callable[[int], str], x: int) -> str:
+    return f(x)
+
+# Type signature for a function that takes a list of integers and returns a list of strings
+def list_int_to_str(numbers: List[int]) -> List[str]:
+    return [str(number) for number in numbers]
 ```
 
-## Partial function (TODO)
+## Algebraic data type
 
-A partial function is a [function](#function-todo) which is not defined for all arguments - it might return an unexpected result or may never terminate. Partial functions add cognitive overhead, they are harder to reason about and can lead to runtime errors. Some examples:
+An algebraic data type (ADT) is a type formed by combining other types. Two common kinds of algebraic types are sum types and product types.
+
+### Sum type
+
+A sum type is a type that can hold a value that could be one of several different types. It is called a sum type because the number of possible values it can represent is the sum of the possible values of its variants.
 
 ```python
-# TODO
+from typing import Union
+
+# A sum type representing either an integer or a string
+NumberOrString = Union[int, str]
+
+def handle_value(value: NumberOrString):
+    if isinstance(value, int):
+        return f"Integer: {value}"
+    elif isinstance(value, str):
+        return f"String: {value}"
+
+assert handle_value(42) == "Integer: 42"
+assert handle_value("hello") == "String: hello"
 ```
 
-### Dealing with partial functions (TODO)
+### Product type
 
-Partial functions are dangerous as they need to be treated with great caution. You might get an unexpected (wrong) result or run into runtime errors. Sometimes a partial function might not return at all. Being aware of and treating all these edge cases accordingly can become very tedious.
-Fortunately a partial function can be converted to a regular (or total) one. We can provide default values or use guards to deal with inputs for which the (previously) partial function is undefined. Utilizing the [`Option`](#option-todo) type, we can yield either `Some(value)` or `None` where we would otherwise have behaved unexpectedly:
+A product type is a type that combines several values into one compound value. It is called a product type because the number of possible values it can represent is the product of the possible values of its components.
 
 ```python
-# TODO
+from typing import NamedTuple
+
+# A product type representing a point in 2D space
+class Point(NamedTuple):
+    x: int
+    y: int
+
+point = Point(1, 2)
+assert point.x == 1
+assert point.y == 2
 ```
+
+## Option
+
+the `Option` type is a powerful construct used to represent an optional value: a value that might exist or might not. It's a way to avoid `null` references and the errors they can cause, known as "null pointer exceptions."
+
+The `Option` type is a sum type, meaning it can be one of several variants. In the case of `Option`, there are typically two variants:
+
+1. `Some`: Indicates the presence of a value. The `Some` variant wraps an actual value.
+2. `None`: Indicates the absence of a value. There is no value present.
+
+This pattern forces the programmer to explicitly handle the case where a value might be missing, leading to safer and more predictable code.
+
+In languages like Haskell, this type is known as `Maybe`, with the variants being `Just` (for `Some`) and `Nothing` (for `None`). In Rust, it's called `Option`, with the variants `Some` and `None`.
+
+```python
+from typing import Generic, TypeVar, Union
+
+T = TypeVar('T')
+
+class Some(Generic[T]):
+    def __init__(self, value: T):
+        self.value = value
+
+class NoneType:
+    pass
+
+NoneValue = NoneType()
+
+Option = Union[Some[T], NoneType]
+
+def divide(dividend: int, divisor: int) -> Option[int]:
+    if divisor == 0:
+        return NoneValue
+    else:
+        return Some(dividend // divisor)
+```
+
+The example above is a Pythonic implementation of the `Option` type, using classes to represent the `Some` variant and Python's built-in `None` to represent the absence of a value.
+
+Here's a breakdown of the example:
+
+- `Some` class: This generic class is used to wrap a value of any type `T`. It provides an `__init__` method to set the value, an `__eq__` method to compare two `Some` instances, and a `__repr__` method for a string representation that is helpful for debugging.
+
+- `divide` function: This function attempts to perform integer division. It returns an `Optional[Some[int]]`, which means the return type could be an instance of `Some` containing an integer or `None`. If the divisor is zero, the function returns `None` to signify that the division cannot be performed. Otherwise, it returns a `Some` object containing the result of the division.
+
+- Example usage: The code demonstrates how to use the `divide` function and how to handle its return value. It checks if the result is `None` to determine if the division was successful. If the result is not `None`, it accesses the value inside the `Some` object using `.value`.
+
+This implementation encourages explicit handling of the case where division by zero might occur, thus avoiding the potential for runtime errors that could arise from an unhandled division by zero. It's a simple yet effective way to introduce some of the safety and expressiveness of functional programming into Python.
+
+## Function
+
+A __function__ `f: A -> B` is an abstraction that encapsulates a computation or transformation: it takes an input of type `A` and produces an output of type `B`. The function guarantees that for every input of type `A`, there will be a corresponding output of type `B`, and this output is solely determined by the input value. This property is known as referential transparency, which means that the function can be replaced with its corresponding output value without changing the program's behavior. Functions in programming are typically pure, meaning they do not cause any side effects outside of producing a return value. This makes functions predictable and easy to reason about.
+
+Here is an example of a simple function in Python:
+
+```python
+def add_one(x: int) -> int:
+    return x + 1
+
+# Usage
+result = add_one(3)  # result is 4
+```
+
+## Partial Function
+
+A partial function is a function that is not defined for all possible inputs of the specified type. In other words, it only provides an output for a subset of possible inputs. When a partial function is given an input that it does not handle, it may throw an exception, return an unexpected result, or never terminate.
+
+Here are some examples of partial functions:
+
+```python
+def inverse(x: float) -> float:
+    if x == 0:
+        raise ValueError("Cannot divide by zero")
+    return 1 / x
+
+def get_first_element(lst: list) -> int:
+    return lst[0]  # This will fail if the list is empty
+```
+
+### Dealing with Partial Functions
+
+To mitigate the risks associated with partial functions, we can convert them into total functions. A total function is defined for all possible inputs and always produces a result. We can handle the cases where the partial function is not defined by providing default values, raising exceptions, or using constructs like `Option` to represent the possibility of failure.
+
+Here's how we might handle the partial functions above in a safer way:
+
+```python
+from typing import Optional
+
+def safe_inverse(x: float) -> Optional[float]:
+    if x == 0:
+        return None
+    return 1 / x
+
+def safe_get_first_element(lst: list) -> Optional[int]:
+    if not lst:
+        return None
+    return lst[0]
+
+# Usage
+result_inverse = safe_inverse(0)  # result_inverse is None
+result_first_element = safe_get_first_element([])  # result_first_element is None
+```
+
+In these examples, we return `None` when the function would otherwise be undefined. This approach forces the caller to handle the possibility that there may not be a valid return value, making the code more robust and predictable.
