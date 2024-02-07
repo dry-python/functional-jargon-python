@@ -1,7 +1,5 @@
 # Functional Programming Jargon
 
-[![Build Status](https://github.com/dry-python/functional-jargon-python/workflows/test/badge.svg?event=push)](https://github.com/dry-python/functional-jargon-python/actions?query=workflow%3Atest)
-
 Functional programming (FP) provides many advantages, and its popularity has been increasing as a result. However, each programming paradigm comes with its own unique jargon and FP is no exception. By providing a glossary, we hope to make learning FP easier.
 
 This is a fork of [Functional Programming Jargon](https://github.com/jmesyou/functional-programming-jargon).
